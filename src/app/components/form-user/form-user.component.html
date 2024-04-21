@@ -1,0 +1,47 @@
+<div>
+    <form action="" class="form-control py-3 px-3" [formGroup]="formUser" (ngSubmit)="generateOddNumbersForm()">
+        <div class="mb-3">
+            <label for="firstNumber" class="form-label">Primer Número</label>
+            <input type="text" 
+                class="form-control" 
+                id="firstNumber" 
+                placeholder="Ingrese un número"
+                formControlName="inputFirstNumber">
+            <ng-container *ngIf="formUser.get('inputFirstNumber')?.hasError('required') && formUser.get('inputFirstNumber')?.touched">
+                <div class="text-danger mt-2">
+                    <span class="fw-bold">¡Debe ingresar un número antes de continuar!</span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="formUser.get('inputFirstNumber')?.errors?.['pattern']">
+                <div class="text-danger mt-2">
+                    <span class="fw-bold">¡Sólo puede ingresar números!</span>
+                </div>
+            </ng-container>
+        </div>
+        <div class="mb-3">
+            <label for="secondNumber" class="form-label">Segundo Número</label>
+            <input type="text" 
+                class="form-control" 
+                id="secondNumber" 
+                placeholder="Ingrese un número"
+                formControlName="inputSecondNumber">
+            <ng-container *ngIf="formUser.get('inputSecondNumber')?.hasError('required') && formUser.get('inputSecondNumber')?.touched">
+                <div class="text-danger mt-2">
+                    <span class="fw-bold">¡Debe ingresar un número antes de continuar!</span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="formUser.get('inputSecondNumber')?.errors?.['pattern']">
+                <div class="text-danger mt-2">
+                    <span class="fw-bold">¡Sólo puede ingresar números!</span>
+                </div>
+            </ng-container>
+        </div>
+        <app-button 
+            (resetInputUser)="resetInputForm()"
+            (generateOddNumbersClick)="generateOddNumbersForm()"
+            ></app-button>
+    </form>
+</div>
+<div class="container mt-3 px-3">
+    <app-odd-amount [showOddNumbersResult]="showOddNumbersResult"></app-odd-amount>
+</div>
